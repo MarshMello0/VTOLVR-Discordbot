@@ -6,7 +6,7 @@ token = 'TOKEN'
 welcomeID = 0
 generalID = 0
 client = commands.Bot(command_prefix = '.')
-
+client.remove_command('help')
 
 @client.event
 async def on_ready():
@@ -60,7 +60,6 @@ async def removeTester(ctx):
 
 @client.command()
 async def mptest(ctx, *user):
-
     if (len(user) is 1):
         await ctx.channel.send(f'{user[0]} there are no planned dates or times when multiplayer tests will happen.')
         await ctx.message.delete()
@@ -68,6 +67,10 @@ async def mptest(ctx, *user):
     await ctx.message.delete()
     await ctx.channel.send("There are no planned dates or times when multiplayer tests will happen.")
     
+@client.command(aliases=['help'])
+async def _help(ctx):
+    await ctx.channel.send("Available commands\n``.addTester`` - Gives you the tester role\n``.removeTester`` - Removes the tester role\n``.help`` - Displays this message\n``.mptest`` - Displays the next mp test message")
+
         
 
 for line in botData:
