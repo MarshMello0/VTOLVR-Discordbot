@@ -4,6 +4,7 @@ from discord.ext import commands
 botData = open("BotData.txt").readlines()
 token = 'TOKEN'
 welcomeID = 0
+generalID = 0
 client = commands.Bot(command_prefix = '.')
 
 
@@ -27,6 +28,8 @@ async def on_member_remove(member):
 
 @client.event
 async def on_message(message):
+    if (message.author == client.user):
+            return
     lowercase = message.content.lower()
     channel = message.channel
     if ("when" in lowercase and "next" in lowercase and "test" in lowercase):
@@ -34,6 +37,26 @@ async def on_message(message):
         return
     await client.process_commands(message)
 
+@client.command()
+async def addTester(ctx):
+    if ("tester" in [y.name.lower() for y in ctx.author.roles]):
+        await ctx.channel.send("You already have the role.\nIf you would like to remove it type ``.removeTester``")
+    else:
+        member = ctx.message.author
+        role = discord.utils.get(member.guild.roles, name="Tester")
+        await ctx.author.add_roles(role)
+        await ctx.channel.send(f"You've been given the tester role <@{ctx.author.id}>")
+
+@client.command()
+async def removeTester(ctx):
+    if ("tester" in [y.name.lower() for y in ctx.author.roles]):
+        member = ctx.message.author
+        role = discord.utils.get(member.guild.roles, name="Tester")
+        await ctx.author.remove_roles(role)
+        channel = client.get_channel(generalID)
+        await channel.send(f'The tester role has been removed <@{member.id}>')
+    else:
+        await ctx.channel.send("You do not have the tester role, if you would like to become a tester for the multiplayer mod type ``.addTester``")
 
 for line in botData:
     result = line.strip()
@@ -43,5 +66,8 @@ for line in botData:
     elif  ("WELCOME=" in result):
         welcomeID = int(result.replace("WELCOME=",""))
         print(f"Welcome Channel ID = {welcomeID}")
+    elif ("GENERAL=" in result):
+        generalID = int(result.replace("GENERAL=",""))
+        print(f"General Channel ID = {generalID}")
     
 client.run(token)
