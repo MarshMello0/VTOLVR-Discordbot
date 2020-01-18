@@ -58,6 +58,18 @@ async def removeTester(ctx):
     else:
         await ctx.channel.send("You do not have the tester role, if you would like to become a tester for the multiplayer mod type ``.addTester``")
 
+@client.command()
+async def mptest(ctx, *user):
+
+    if (len(user) is 1):
+        await ctx.channel.send(f'{user[0]} there are no planned dates or times when multiplayer tests will happen.')
+        await ctx.message.delete()
+        return
+    await ctx.message.delete()
+    await ctx.channel.send("There are no planned dates or times when multiplayer tests will happen.")
+    
+        
+
 for line in botData:
     result = line.strip()
     if ("TOKEN=" in result):
