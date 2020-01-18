@@ -25,6 +25,16 @@ async def on_member_remove(member):
     await channel.send(f'{member}  has left the server')
 
 
+@client.event
+async def on_message(message):
+    lowercase = message.content.lower()
+    channel = message.channel
+    if ("when" in lowercase and "next" in lowercase and "test" in lowercase):
+        await channel.send("If you are asking about when the next multiplayer test will be, sadly there isn't planned dates for them. They just happen when its ready to be tested. Sorry.")
+        return
+    await client.process_commands(message)
+
+
 for line in botData:
     result = line.strip()
     if ("TOKEN=" in result):
