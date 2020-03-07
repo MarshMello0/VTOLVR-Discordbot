@@ -66,9 +66,8 @@ async def removeTester(ctx):
     if ("tester" in [y.name.lower() for y in ctx.author.roles]):
         member = ctx.message.author
         role = discord.utils.get(member.guild.roles, name="Tester")
-        await ctx.author.remove_roles(role)
-        channel = client.get_channel(generalID)
-        await channel.send(f'The tester role has been removed <@{member.id}>')
+        await ctx.channel.send(f'The tester role has been removed <@{member.id}>')
+        await ctx.author.remove_roles(role)        
     else:
         await ctx.channel.send("You do not have the tester role, if you would like to become a tester for the multiplayer mod type ``.addTester``")
 
