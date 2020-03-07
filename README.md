@@ -15,7 +15,11 @@ BotData.txt Example:
 The script checks the line, if it contains one of the three variables it needs to fill, then everything else on that line gets used as the variable.
 
 ## Contributions
+
+[Ketkev](https://github.com/MarshMello0/VTOLVR-Discordbot/commits?author=ketkev "Ketkev's Commits") added a responce when a user links the multiplayer mod's github repository.
+
 Contributions are welcomed, if you would like to add a feature to the bot to be added to the official discord, fork the project, add your features then create a pull request and if it gets approved it will be added into the bot.
+
 
 ## Useful links
 
