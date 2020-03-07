@@ -10,7 +10,6 @@ print('Finished waiting')
 botData = open("BotData.txt").readlines()
 token = 'TOKEN'
 welcomeID = 0
-generalID = 0
 client = commands.Bot(command_prefix='.')
 client.remove_command('help')
 
@@ -95,8 +94,5 @@ for line in botData:
     elif ("WELCOME=" in result):
         welcomeID = int(result.replace("WELCOME=", ""))
         print(f"Welcome Channel ID = {welcomeID}")
-    elif ("GENERAL=" in result):
-        generalID = int(result.replace("GENERAL=", ""))
-        print(f"General Channel ID = {generalID}")
 
 client.run(token)

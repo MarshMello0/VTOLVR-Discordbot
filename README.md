@@ -12,7 +12,6 @@ BotData.txt Example:
 
     TOKEN=YOUTOKEN
     WELCOME=123456789
-    GENERAL=123456789
 The script checks the line, if it contains one of the three variables it needs to fill, then everything else on that line gets used as the variable.
 
 ## Contributions
