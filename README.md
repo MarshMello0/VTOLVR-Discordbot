@@ -10,8 +10,9 @@ Once you have cloned the repository to your local files. You need to create a te
 
 BotData.txt Example:
 
-    TOKEN=YOUTOKEN
+    TOKEN=YOURTOKEN
     WELCOME=123456789
+    GUILD=123456789
 The script checks the line, if it contains one of the three variables it needs to fill, then everything else on that line gets used as the variable.
 
 ## Contributions

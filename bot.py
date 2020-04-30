@@ -10,13 +10,15 @@ print('Finished waiting')
 botData = open("BotData.txt").readlines()
 token = 'TOKEN'
 welcomeID = 0
+serverID = 0
 client = commands.Bot(command_prefix='.')
 client.remove_command('help')
 
 
 @client.event
 async def on_ready():
-    await client.change_presence(status=discord.Status.online, activity=discord.Game('vtolvr-mods.com'))
+    guild = client.get_guild(serverID)
+    await client.change_presence(status=discord.Status.online, activity=discord.Game(str(guild.member_count) + ' members!'))
     print("Bot has logged in")
 
 
@@ -24,6 +26,8 @@ async def on_ready():
 async def on_member_join(member):
     print(f"{member} joined the server")
     channel = client.get_channel(welcomeID)
+    guild = client.get_guild(serverID)
+    await client.change_presence(status=discord.Status.online, activity=discord.Game(str(guild.member_count) + ' members!'))
     await channel.send(f'<@{member.id}>  has joined the server!')
 
 
@@ -31,7 +35,9 @@ async def on_member_join(member):
 async def on_member_remove(member):
     print(f"{member} left the server")
     channel = client.get_channel(welcomeID)
+    guild = client.get_guild(serverID)
     await channel.send(f'{member}  has left the server')
+    await client.change_presence(status=discord.Status.online, activity=discord.Game(str(guild.member_count) + ' members!'))
 
 
 @client.event
@@ -47,7 +53,6 @@ async def on_message(message):
         await channel.send("You've seem to have found the multiplayer mod repository. This isn't currently playable and is only there so people can easily contribute to it. Sorry.")
         return
     await client.process_commands(message)
-
 
 @client.command()
 async def addTester(ctx):
@@ -108,9 +113,9 @@ for line in botData:
     result = line.strip()
     if ("TOKEN=" in result):
         token = result.replace("TOKEN=", "")
-        print(f"Token = {token}")
     elif ("WELCOME=" in result):
         welcomeID = int(result.replace("WELCOME=", ""))
-        print(f"Welcome Channel ID = {welcomeID}")
+    elif ("GUILD=" in result):
+        serverID = int(result.replace("GUILD=",""))
 
 client.run(token)
