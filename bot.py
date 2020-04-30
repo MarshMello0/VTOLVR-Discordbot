@@ -3,9 +3,10 @@ import discord
 import time
 from discord.ext import commands
 
-print('Discord Bot Started, waiting 15 seconds')
-time.sleep(15)
-print('Finished waiting')
+#
+#print('Discord Bot Started, waiting 15 seconds')
+#time.sleep(1)
+#print('Finished waiting')
 
 botData = open("BotData.txt").readlines()
 token = 'TOKEN'
@@ -103,11 +104,18 @@ async def mptest(ctx, *user):
     await ctx.message.delete()
     await ctx.channel.send("There are no planned dates or times when multiplayer tests will happen.")
 
+@client.command()
+async def stats(ctx):
+    guild = client.get_guild(serverID)
+    testerscount = 0
+    for member in guild.members:
+        if ("tester" in [y.name.lower() for y in member.roles]):
+            testerscount = testerscount + 1
+    await ctx.channel.send(str(guild.member_count) + " members"+ "\n" + str(testerscount) + " testers")
 
 @client.command(aliases=['help'])
 async def _help(ctx):
-    await ctx.channel.send("Available commands\n``.addTester`` - Gives you the tester role\n``.removeTester`` - Removes the tester role\n``.help`` - Displays this message\n``.mptest`` - Displays the next mp test message")
-
+    await ctx.channel.send("Available commands\n``.addTester`` - Gives you the tester role\n``.removeTester`` - Removes the tester role\n``.help`` - Displays this message\n``.mptest`` - Displays the next mp test message\n``.stats`` - Displays the servers stats")
 
 for line in botData:
     result = line.strip()
