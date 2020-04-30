@@ -1,14 +1,14 @@
 #!python3
 import discord
 import time
+import os
 from discord.ext import commands
 
-#
-#print('Discord Bot Started, waiting 15 seconds')
-#time.sleep(1)
-#print('Finished waiting')
+print('Discord Bot Started, waiting 15 seconds')
+time.sleep(15)
+print('Finished waiting')
 
-botData = open("BotData.txt").readlines()
+botData = open(os.path.dirname(os.path.abspath(__file__)) + os.sep + "BotData.txt").readlines()
 token = 'TOKEN'
 welcomeID = 0
 serverID = 0
