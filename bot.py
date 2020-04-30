@@ -59,6 +59,15 @@ async def addTester(ctx):
         await ctx.author.add_roles(role)
         await ctx.channel.send(f"You've been given the tester role <@{ctx.author.id}>")
 
+@client.command()
+async def addtester(ctx):
+    if ("tester" in [y.name.lower() for y in ctx.author.roles]):
+        await ctx.channel.send("You already have the role.\nIf you would like to remove it type ``.removeTester``")
+    else:
+        member = ctx.message.author
+        role = discord.utils.get(member.guild.roles, name="Tester")
+        await ctx.author.add_roles(role)
+        await ctx.channel.send(f"You've been given the tester role <@{ctx.author.id}>")
 
 @client.command()
 async def removeTester(ctx):
@@ -70,6 +79,15 @@ async def removeTester(ctx):
     else:
         await ctx.channel.send("You do not have the tester role, if you would like to become a tester for the multiplayer mod type ``.addTester``")
 
+@client.command()
+async def removetester(ctx):
+    if ("tester" in [y.name.lower() for y in ctx.author.roles]):
+        member = ctx.message.author
+        role = discord.utils.get(member.guild.roles, name="Tester")
+        await ctx.channel.send(f'The tester role has been removed <@{member.id}>')
+        await ctx.author.remove_roles(role)        
+    else:
+        await ctx.channel.send("You do not have the tester role, if you would like to become a tester for the multiplayer mod type ``.addTester``")
 
 @client.command()
 async def mptest(ctx, *user):
