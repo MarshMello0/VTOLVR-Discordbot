@@ -1,3 +1,5 @@
+# This project has moved to Gitlab along with the others releated to VTOLVR Modding
+You can view them all [here](https://gitlab.com/vtolvr-mods)
 # VTOL VR Modding Server's Discord Bot
 ![Python Version](https://img.shields.io/badge/Python-3.6%2B-blue) [![Discord](https://img.shields.io/discord/597153468834119710?label=VTOL%20VR%20Modding&logo=discord&style=flat-square)](https://discord.gg/XZeeafp "Discord Invite")
 
